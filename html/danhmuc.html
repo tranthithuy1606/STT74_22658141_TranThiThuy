@@ -452,6 +452,16 @@ button:hover {
       <h3>Sách Trong Nước</h3>
       <p>Một nền tảng chuyên cung cấp các đầu sách trong nước của Việt Nam, từ những tác phẩm văn học kinh điển đến sách kỹ năng, giáo dục và nghiên cứu. Với mục tiêu tôn vinh văn hóa đọc và lan tỏa tri thức Việt, trang web mang đến cho độc giả nhiều sự lựa chọn phong phú và đa dạng. Giao diện dễ sử dụng, thông tin chi tiết về từng quyển sách và các chương trình khuyến mãi hấp dẫn giúp người đọc tiếp cận sách dễ dàng hơn. Ngoài ra, dịch vụ giao hàng nhanh chóng trên toàn quốc cũng là điểm cộng lớn của trang web.</p>
       <div class="iq-card-body">  
+         <div class="iq-card-body">  
+            <div class="row">
+               <div class="container mt-5">
+                  <div class="row" id="product-list">
+                      <!-- Danh sách sản phẩm sẽ được chèn vào bằng JavaScript -->
+                  </div>
+               </div>
+               
+            </div>
+         </div>
         <div class="row">
            <div class="col-sm-6 col-md-4 col-lg-3 p-3">
               <div class="iq-card iq-card-block iq-card-stretch iq-card-height browse-bookcontent">
@@ -743,7 +753,8 @@ button:hover {
     <div id="menu2" class="container tab-pane fade"><br>
       <h3>Sách Kinh Tế</h3>
       <p>Chúng tôi cung cấp một kho tàng sách kinh tế đa dạng, từ các cuốn sách kinh điển về kinh tế học cơ bản đến những nghiên cứu chuyên sâu về xu hướng kinh tế toàn cầu. Với mục tiêu mang lại kiến thức hữu ích cho học giả, nhà kinh doanh, và những ai đam mê lĩnh vực kinh tế, chúng tôi cập nhật liên tục các ấn phẩm mới nhất từ các tác giả hàng đầu. Ngoài ra, trang web còn cung cấp đánh giá sách chi tiết, giúp người đọc dễ dàng chọn lựa tài liệu phù hợp để phát triển hiểu biết và kỹ năng trong nền kinh tế ngày càng phức tạp.</p>
-      <div class="iq-card-body">  
+      <div class="iq-card-body"> 
+         
          <div class="row" style="text-align: left;">
             <div class="col-sm-6 col-md-4 col-lg-4 p-3">
                <div class="iq-card iq-card-block iq-card-stretch iq-card-height browse-bookcontent">
@@ -772,7 +783,7 @@ button:hover {
                               <h6><b>179.000 đ</b></h6>
                            </div>
                            <div class="iq-product-action">
-                              <button class="add-to-cart" data-title="Bí Quyết Làm Giàu Của Napoleon Hill" data-price="79000 ₫" style="background:none; margin-left: 50px;"><img src="../img/giohangmenu.jpg" style="width: 30px; border-radius: 30px;" alt=""></button>
+                              <button class="add-to-cart" data-title="Bí Quyết Làm Giàu Của Napoleon Hill" data-price="79000 ₫" style="background:none; margin-left: 50px;"><img src="../img/giohangmenu.jpg" style="width: 30px; border-radius: 30px;" alt="" onclick="addToCart()"></button>
                               
                            </div>                                      
                         </div>
