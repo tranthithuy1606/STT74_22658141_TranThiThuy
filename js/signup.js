@@ -2,7 +2,10 @@
 const inputUsernameRegister = document.querySelector(".input-signup-username");
 const inputPasswordRegister = document.querySelector(".input-signup-password");
 const btnRegister = document.querySelector(".signup__signInButton");
-
+function isValidUsername(username) {
+    const usernameRegex = /^[a-zA-Z\s]+$/; // Chỉ chứa chữ cái và khoảng trắng
+    return usernameRegex.test(username);
+}
 // Hàm kiểm tra mật khẩu mạnh
 function isStrongPassword(password) {
   // Kiểm tra độ dài
@@ -32,7 +35,9 @@ btnRegister.addEventListener("click", (e) => {
     inputPasswordRegister.value === ""
   ) {
     alert("Vui lòng không để trống");
-  } else if (!isStrongPassword(inputPasswordRegister.value)) {
+  } else if (!isValidUsername(inputUsernameRegister.value)) {
+    alert("Tên người dùng không được chứa số hoặc ký tự đặc biệt.");
+  }else if (!isStrongPassword(inputPasswordRegister.value)) {
     alert("Mật khẩu phải có ít nhất 12 ký tự, ký tự đầu là chữ viết hoa, và có ít nhất một ký tự đặc biệt.");
   } else {
     // array user
