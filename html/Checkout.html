@@ -281,8 +281,13 @@
                                     </div>
                                  </div>
                                  <hr>
-                                 <a id="deliver-address" href="javascript:void();" class="btn btn-warning d-block mt-1 next m-3">Thanh toán</a>
-
+                                 <a id="btnPayment" href="javascript:void();" class="btn btn-warning d-block mt-1 next m-3">Thanh toán</a>
+                                 <script>
+                                    // Lắng nghe sự kiện click trên nút thanh toán
+                                    document.getElementById("btnPayment").addEventListener("click", function () {
+                                        alert("Thanh toán thành công!"); // Hiển thị thông báo
+                                    });
+                                </script>
                               </div>
                            </div>
                         </div>
