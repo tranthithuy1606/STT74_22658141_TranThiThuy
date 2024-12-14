@@ -30,23 +30,23 @@ function isStrongPassword(password) {
 // validation form register and register user local storage
 btnRegister.addEventListener("click", (e) => {
   e.preventDefault();
-  if (
-    inputUsernameRegister.value === "" ||
-    inputPasswordRegister.value === ""
-  ) {
-    alert("Vui lòng không để trống");
-  } else if (!isValidUsername(inputUsernameRegister.value)) {
-    alert("Tên người dùng không được chứa số hoặc ký tự đặc biệt.");
-  }else if (!isStrongPassword(inputPasswordRegister.value)) {
-    alert("Mật khẩu phải có ít nhất 12 ký tự, ký tự đầu là chữ viết hoa, và có ít nhất một ký tự đặc biệt.");
-  } else {
-    // array user
-    const user = {
-      username: inputUsernameRegister.value,
-      password: inputPasswordRegister.value,
-    };
-    let json = JSON.stringify(user);
-    localStorage.setItem(inputUsernameRegister.value, json);
+const username = inputUsernameRegister.value.trim(); // Lấy giá trị username
+const password = inputPasswordRegister.value.trim(); // Lấy giá trị password
+   // Kiểm tra điều kiện username
+   if (!isValidUsername(username)) {
+    alert("Tên người dùng không hợp lệ. Vui lòng chỉ nhập chữ cái và khoảng trắng.");
+    return;
+}
+
+// Kiểm tra điều kiện mật khẩu
+if (!isStrongPassword(password)) {
+    alert("Mật khẩu phải có ít nhất 12 ký tự, bắt đầu bằng chữ viết hoa và chứa ít nhất một ký tự đặc biệt.");
+    return;
+}
+
+     // Nếu tất cả điều kiện hợp lệ, lưu thông tin vào localStorage
+     const user = { username, password };
+     localStorage.setItem("user", JSON.stringify(user));
 
     // Hiển thị thông báo thành công kèm username và password
     alert(`Đăng ký thành công! \nUsername: ${user.username}\nPassword: ${user.password}`);
