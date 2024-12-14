@@ -51,5 +51,4 @@ if (!isStrongPassword(password)) {
     // Hiển thị thông báo thành công kèm username và password
     alert(`Đăng ký thành công! \nUsername: ${user.username}\nPassword: ${user.password}`);
     window.location.href = "login.html";
-  }
 });
