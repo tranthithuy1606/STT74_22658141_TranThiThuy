@@ -1,74 +1,50 @@
-// Kiểm tra username hợp lệ (không chứa số và ký tự đặc biệt)
-function isValidUsername(username) {
-    const usernameRegex = /^[a-zA-Z\s]+$/; // Chỉ chứa chữ cái và khoảng trắng
-    return usernameRegex.test(username);
-}
+// validation form register and register user local storage
+const inputUsernameRegister = document.querySelector(".input-signup-username");
+const inputPasswordRegister = document.querySelector(".input-signup-password");
+const btnRegister = document.querySelector(".signup__signInButton");
 
-// Kiểm tra email hợp lệ (@gmail.com)
-function isValidEmail(email) {
-    const emailRegex = /^[a-zA-Z0-9._%+-]+@gmail\.com$/; // Email đuôi @gmail.com
-    return emailRegex.test(email);
-}
-
-// Kiểm tra mật khẩu mạnh
+// Hàm kiểm tra mật khẩu mạnh
 function isStrongPassword(password) {
-    if (password.length < 12) return false; // Đủ 12 ký tự
-    if (password[0] !== password[0].toUpperCase()) return false; // Ký tự đầu viết hoa
-    return true;
+  // Kiểm tra độ dài
+  if (password.length < 12) {
+    return false;
+  }
+
+  // Kiểm tra ký tự đầu tiên có phải là chữ viết hoa
+  if (password[0] !== password[0].toUpperCase() || !/[A-Z]/.test(password[0])) {
+    return false;
+  }
+
+  // Kiểm tra có ít nhất một ký tự đặc biệt
+  const specialCharacters = /[!@#$%^&*(),.?":{}|<>]/;
+  if (!specialCharacters.test(password)) {
+    return false;
+  }
+
+  return true;
 }
 
-// Xử lý form đăng ký
-$("#registerForm").on("submit", function (e) {
-    e.preventDefault();
+// validation form register and register user local storage
+btnRegister.addEventListener("click", (e) => {
+  e.preventDefault();
+  if (
+    inputUsernameRegister.value === "" ||
+    inputPasswordRegister.value === ""
+  ) {
+    alert("Vui lòng không để trống");
+  } else if (!isStrongPassword(inputPasswordRegister.value)) {
+    alert("Mật khẩu phải có ít nhất 12 ký tự, ký tự đầu là chữ viết hoa, và có ít nhất một ký tự đặc biệt.");
+  } else {
+    // array user
+    const user = {
+      username: inputUsernameRegister.value,
+      password: inputPasswordRegister.value,
+    };
+    let json = JSON.stringify(user);
+    localStorage.setItem(inputUsernameRegister.value, json);
 
-    const username = $("#username").val().trim();
-    const email = $("#email").val().trim();
-    const password = $("#password").val();
-
-    // Kiểm tra điều kiện
-    if (!isValidUsername(username)) {
-        alert("Tên người dùng không được chứa số hoặc ký tự đặc biệt.");
-        return;
-    }
-    if (!isValidEmail(email)) {
-        alert("Email phải có đuôi @gmail.com.");
-        return;
-    }
-    if (!isStrongPassword(password)) {
-        alert("Mật khẩu phải có ít nhất 12 ký tự và bắt đầu bằng chữ viết hoa.");
-        return;
-    }
-
-    // Lưu thông tin người dùng vào LocalStorage
-    const user = { username, email, password };
-    localStorage.setItem("user", JSON.stringify(user));
-
-    alert("Đăng ký thành công!");
-    window.location.href = "login.html"; // Chuyển hướng sang trang đăng nhập
+    // Hiển thị thông báo thành công kèm username và password
+    alert(`Đăng ký thành công! \nUsername: ${user.username}\nPassword: ${user.password}`);
+    window.location.href = "login.html";
+  }
 });
-
-// Xử lý form đăng nhập
-$("#loginForm").on("submit", function (e) {
-    e.preventDefault();
-
-    const loginUsername = $("#loginUsername").val().trim();
-    const loginPassword = $("#loginPassword").val();
-
-    // Lấy thông tin người dùng từ LocalStorage
-    const user = JSON.parse(localStorage.getItem("user"));
-
-    if (!user) {
-        alert("Tài khoản không tồn tại. Vui lòng đăng ký.");
-        return;
-    }
-
-    // Kiểm tra thông tin đăng nhập
-    if (user.username === loginUsername && user.password === loginPassword) {
-        alert("Đăng nhập thành công!");
-        // Chuyển đến trang chính (nếu có)
-        window.location.href = "dashboard.html"; // Tùy chỉnh đường dẫn
-    } else {
-        alert("Username hoặc mật khẩu không đúng. Vui lòng thử lại.");
-    }
-});
-
