@@ -2,10 +2,7 @@
 const inputUsernameRegister = document.querySelector(".input-signup-username");
 const inputPasswordRegister = document.querySelector(".input-signup-password");
 const btnRegister = document.querySelector(".signup__signInButton");
-function isValidUsername(username) {
-    const usernameRegex = /^[a-zA-Z\s]+$/; // Chỉ chứa chữ cái và khoảng trắng
-    return usernameRegex.test(username);
-}
+
 // Hàm kiểm tra mật khẩu mạnh
 function isStrongPassword(password) {
   // Kiểm tra độ dài
@@ -30,25 +27,24 @@ function isStrongPassword(password) {
 // validation form register and register user local storage
 btnRegister.addEventListener("click", (e) => {
   e.preventDefault();
-const username = inputUsernameRegister.value.trim(); // Lấy giá trị username
-const password = inputPasswordRegister.value.trim(); // Lấy giá trị password
-   // Kiểm tra điều kiện username
-   if (!isValidUsername(username)) {
-    alert("Tên người dùng không hợp lệ. Vui lòng chỉ nhập chữ cái và khoảng trắng.");
-    return;
-}
-
-// Kiểm tra điều kiện mật khẩu
-if (!isStrongPassword(password)) {
-    alert("Mật khẩu phải có ít nhất 12 ký tự, bắt đầu bằng chữ viết hoa và chứa ít nhất một ký tự đặc biệt.");
-    return;
-}
-
-     // Nếu tất cả điều kiện hợp lệ, lưu thông tin vào localStorage
-     const user = { username, password };
-     localStorage.setItem("user", JSON.stringify(user));
+  if (
+    inputUsernameRegister.value === "" ||
+    inputPasswordRegister.value === ""
+  ) {
+    alert("Vui lòng không để trống");
+  } else if (!isStrongPassword(inputPasswordRegister.value)) {
+    alert("Mật khẩu phải có ít nhất 12 ký tự, ký tự đầu là chữ viết hoa, và có ít nhất một ký tự đặc biệt.");
+  } else {
+    // array user
+    const user = {
+      username: inputUsernameRegister.value,
+      password: inputPasswordRegister.value,
+    };
+    let json = JSON.stringify(user);
+    localStorage.setItem(inputUsernameRegister.value, json);
 
     // Hiển thị thông báo thành công kèm username và password
     alert(`Đăng ký thành công! \nUsername: ${user.username}\nPassword: ${user.password}`);
     window.location.href = "login.html";
+  }
 });
